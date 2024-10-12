@@ -1,0 +1,23 @@
+import { Steps } from 'nextra/components'
+
+Steam Web Api key scripts are used to access the player's steam information. Sensitive data such as account password email is inaccessible, so don't worry about it.
+
+<Steps>
+    ### Go to Steam API Key Page
+    Navigate to the <a href={"https://steamcommunity.com/dev/apikey"} style={{ color: '#008ae6' }}>Steam API Key Registration Page</a>.
+
+    ### Log into Your Steam Account
+    You need to be logged in to your Steam account to request an API key.
+
+    ### Enter Your Domain Name
+    Provide a domain name, or use a placeholder like `localhost` for development purposes.
+
+    ### Accept Terms of Service
+    Check the box to accept the terms and conditions.
+
+    ### Generate Your API Key
+    Click the "Generate API Key" button to receive your key.
+
+    ### Edit Config File
+    Add your Steam API key to the `server.cfg` file in the `set steam_webApiKey "yourApiKey"` field.
+</Steps>

@@ -1,0 +1,140 @@
+import { Tabs, Callout, Steps, Cards } from 'nextra/components'
+
+# Installation Guide
+
+<Cards>
+    <Cards.Card
+        title="HDStore Spawn"
+        href="https://hdstore.tebex.io/package/6496638"
+        arrow
+    />
+    <Cards.Card
+        title="Spawn Preview"
+        href="https://www.youtube.com/watch?v=_NsYIYaeC7A"
+        arrow
+    />
+    <Cards.Card
+        title="Support Discord"
+        href="https://discord.gg/hdstore"
+        arrow
+    />
+</Cards>
+
+<Callout type='info'>
+    If you follow this guide completely, you will install the **hdstore-spawn** script without any problems.
+</Callout>
+
+<Steps>
+    ### Locales
+
+    First, you need to set the language of the loading screen.
+
+    Defualtly set to `en (English)` the actively available languages are `en (Turkish)`.
+
+    See  to see other languages
+
+    ```lua filename="hdstore-spawn/config/config.lua" copy showLineNumbers
+    Config.Locale = 'en'
+    ```
+
+    ### Set Bucket
+
+    Enter the bucket you use as standard, if you don't know what it is, don't touch it
+
+    ```lua filename="hdstore-spawn/config/config.lua" copy showLineNumbers
+    Config.DefaultBucket = 0
+    ```
+
+    ### Hide Hud
+
+    If you are using a different hud and want to hide it you can edit it.
+
+    ```lua filename="hdstore-spawn/config/config.lua" copy showLineNumbers
+    Config.CustomHud = function(bool)
+        if bool then
+            -- Example: exports['myhud']:SetDisplay(false)
+        else
+            -- Example: exports['myhud']:SetDisplay(true)
+        end
+    end
+    ```
+
+    ### Notification
+
+    Specify the notification system you use!
+
+    ```lua filename="hdstore-spawn/config/config.lua" copy showLineNumbers
+    Config.Notification = function(message, time, type)
+        -- ESX.ShowNotification(message, type, time)
+        QBCore.Functions.Notify(message, type, time)
+        -- QBX:Notify(message, type, time)
+    end
+    ```
+
+    ### On Dead Only Last Position
+
+    Specify true if you only want players who exit the game dead to spawn in the last position.
+
+    ```lua filename="hdstore-spawn/config/config.lua" copy showLineNumbers
+    Config.OnDeadOnlyLastPosition = false
+    ```
+
+    ### Spawn Locations
+
+    You can add spawn points to the map by typing the code below.
+
+    ```lua filename="hdstore-spawn/config/config.lua" copy showLineNumbers
+    ---@param id number
+    ---@param firstName string
+    ---@param secondName string
+    ---@param coords vector4
+    Config.Locations = {
+        [1] = {
+            id = 1,
+            firstName = 'MIRROR PARK',
+            secondName = 'BOULEVARD',
+            coords = vector4(1127.14, -645.29, 55.79, 281.89),
+        },
+        [2] = {
+            id = 2,
+            firstName = 'LOS SANTOS',
+            secondName = 'AIRPORT',
+            coords = vector4(-1037.8, -2737.82, 19.17, 325.98),
+        },
+        [3] = {
+            id = 3,
+            firstName = 'VINEWOOD',
+            secondName = 'BEACH',
+            coords = vector4(-1265.34, -1481.28, 3.33, 286.73),
+        },
+        [4] = {
+            id = 4,
+            firstName = 'SANDY',
+            secondName = 'SHORES',
+            coords = vector4(1138.84, 2672.44, 37.13, 89.32),
+        },
+        [5] = {
+            id = 5,
+            firstName = 'PALETO',
+            secondName = 'BAY',
+            coords = vector4(159.59, 6587.62, 31.12, 187.2),
+        },
+    }
+    ```
+
+    ### Time Status 
+
+    Set `SyncStatus` to **true** if you want to use synchronized weather.
+
+    Enter a value between `0-23` to change the time
+
+    Enter the weather you want to use.
+
+    ```lua filename="hdstore-spawn/config/config.lua" copy showLineNumbers
+    Config.TimeSettings = {
+        SyncStatus = false,
+        Time = 23, -- 0-23
+        Weather = 'THUNDER' -- CLEAR, EXTRASUNNY, CLOUDS, OVERCAST, RAIN, CLEARING , THUNDER, SMOG, FOGGY, XMAS , SNOWLIGHT, BLIZZARD
+    }
+    ```
+</Steps>

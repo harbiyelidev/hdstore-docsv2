@@ -1,0 +1,119 @@
+import { Tabs, Callout, Steps, Cards } from 'nextra/components'
+
+# Installation Guide
+
+<Cards>
+    <Cards.Card
+        title="HDStore Tebex"
+        href="https://hdstore.tebex.io/"
+        arrow
+    />
+    <Cards.Card
+        title="HDStore Loadingscreen"
+        href="https://hdstore.tebex.io/package/6494195"
+        arrow
+    />
+    <Cards.Card
+        title="Support Discord"
+        href="https://discord.gg/hdstore"
+        arrow
+    />
+</Cards>
+
+<Callout type='info'>
+    If you follow this guide completely, you will install the **hdstore-loadingscreen** script without any problems.
+</Callout>
+
+<Steps>
+    ### Locales
+
+    First, you need to set the language of the loading screen.
+
+    Defualtly set to `en (English)` the actively available languages are `en (Turkish)`.
+
+    See  to see other languages
+
+    ```js filename="hdstore-loadingscreen/config/config.js" copy showLineNumbers
+    locales: 'en',
+    ```
+
+    ### Background Video
+
+    You can change the video in the background by typing the code in the region where `change_video_id` is specified with the `video_id` in a youtube video link `https://www.youtube.com/watch?v=video_id`!
+
+    ```js filename="hdstore-loadingscreen/config/config.js" copy showLineNumbers
+    youtubeVideoId: 'change_video_id',
+    ```
+
+    ### Social Media
+
+    You can add your social media accounts to the loading screen by typing the code below.
+
+    ```js filename="hdstore-loadingscreen/config/config.js" copy showLineNumbers
+    ---@param name: Name of the social media
+    ---@param image: Name of the image in the `public/assets/images` folder
+    ---@param description: Description of the social media
+    ---@param link: Link of the social media
+    socials: [
+        { name: 'X', image: 'twitter', description: 'x.com/hdstore', link: 'https://x.com/hdstore' },
+        { name: 'Instagram', image: 'instagram', description: 'instagram.com/hdstore', link: 'https://instagram.com/hdstore' },
+        { name: 'Github', image: 'github', description: 'github.com/hdstore', link: 'https://github.com/hdstore' },
+    ],
+    ```
+
+    ### Updates
+
+    You can add the updates you have made to the loading screen by typing the code below.
+
+    ```js filename="hdstore-loadingscreen/config/config.js" copy showLineNumbers
+    ---@param title: Title of the update
+    ---@param date: Date of the update
+    ---@param description: Description of the update
+    updates: [
+        { title: 'Update 1', date: '10.10.2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+        { title: 'Update 2', date: '10.10.2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+        { title: 'Update 3', date: '10.10.2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+        { title: 'Update 4', date: '10.10.2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+        { title: 'Update 5', date: '10.10.2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+        { title: 'Update 6', date: '10.10.2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+        { title: 'Update 7', date: '10.10.2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+        { title: 'Update 8', date: '10.10.2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+    ],
+    ```
+
+    ### Staff
+
+    You can add your staff to the loading screen by typing the code below.
+
+    ```js filename="hdstore-loadingscreen/config/config.js" copy showLineNumbers
+
+    ---@param image: Name of the image in the `config/team` folder
+    ---@param firstname: First name of the staff
+    ---@param lastname: Last name of the staff
+    ---@param tag: Tag of the staff
+    ---@param color: Color of the tag
+    staffs: [
+        { image: 'harbiyeli.png', firstname: 'Harbiyeli', lastname: 'Developer', tag: 'Owner', color: '#FFBB00' },
+        { image: 'vezironi.png', firstname: 'Vezir', lastname: 'Oni', tag: 'Co-Owner', color: '#FF0000' },
+        { image: 'harbiyeli.png', firstname: 'Harbiyeli', lastname: 'Developer', tag: 'Developer', color: '#15996B' },
+        { image: 'vezironi.png', firstname: 'Vezir', lastname: 'Oni', tag: 'Staff', color: '#00B2FF'},
+        { image: 'harbiyeli.png', firstname: 'Harbiyeli', lastname: 'Developer', tag: 'Trial Staff', color: '#BBFF00' },
+    ],
+    ```
+
+    ### Music 
+    You can add your music to the loading screen by typing the code below.
+
+    In the folder named `config/music` create a folder with the name you put in the path and put a music file in `.mp3` format and the name you put in the path and also put a cover image in `.png` format and the name you put in the path.
+
+    ```js filename="hdstore-loadingscreen/config/config.js" copy showLineNumbers
+    ---@param name: Name of the music
+    ---@param author: Author of the music
+    ---@param path: Path of the music in the `config/music/${path}` folder
+    musics: [
+        { name: 'CISTAK', author: 'Era7capone ft. Batuflex', path: 'cistak' },
+        { name: 'Çözemezler', author: 'Lvbel C5', path: 'cozemezler' },
+        { name: 'Kurtlar Sofrası', author: 'Ali Kınık', path: 'kurtlar' },
+    ],
+    ```
+</Steps>
