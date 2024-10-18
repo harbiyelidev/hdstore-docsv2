@@ -16,7 +16,7 @@ export default {
       return (
         <>
           <meta name="description" content="A store that produces premium scenarios for a game called FiveM!" />
-          <meta name="google-site-verification" content="googleb14168684a72b411.html" />
+          <meta name="google-site-verification" content="5slTPZBcbfGTxlXmX3dN-JH32Qr4C-Kf5ZR68XewxXU" />
           <meta name="robots" content="noindex,nofollow" />
           <meta property="og:url" content={url} />
           <meta property="og:site_name" content="HDStore" />
