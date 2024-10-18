@@ -1,5 +1,6 @@
-import { useRouter } from 'next/router'
-import { useConfig } from 'nextra-theme-docs'
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useConfig } from 'nextra-theme-docs';
  
 export default {
     logo: <div style={{"paddingLeft": "47px", "lineHeight": "38px", "background": "url('https://i.hizliresim.com/jdw864z.png') no-repeat left", "backgroundSize": "36px", "fontWeight": "550"}}>HDStore</div>,
