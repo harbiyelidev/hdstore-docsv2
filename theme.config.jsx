@@ -1,31 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { useConfig } from 'nextra-theme-docs';
-
-function useNextSeoProps() {
-  const router = useRouter();
-  const [seoProps, setSeoProps] = useState(null);
-
-  useEffect(() => {
-    if (!router.isReady) return; // Router hazır değilse işlemi durdur
-    
-    const { asPath } = router;
-    const arr = asPath.replace(/[-_]/g, ' ').split('/');
-    const category = (arr[1][0] !== '#' && arr[1]) || 'HDStore';
-    const rawTitle = arr[arr.length - 1];
-    const title = /[a-z]/.test(rawTitle) && /[A-Z]/.test(rawTitle) ? rawTitle : '%s';
-
-    setSeoProps({
-      titleTemplate: `${title} - ${
-        rawTitle === category
-          ? 'Documentation'
-          : category.replace(/(^\w|\s\w)/g, (m) => m.toUpperCase())
-      }`,
-    });
-  }, [router]);
-
-  return seoProps;
-}
 
 function useHead() {
   const { asPath } = useRouter();
@@ -35,7 +10,7 @@ function useHead() {
 
   return (
     <>
-      <title>{useNextSeoProps}</title>
+      <title>{title} - HDStore Docs</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="icon" type="image/x-icon" href="/static/hdstore.ico" />
       <meta httpEquiv="Content-Language" content="en" />
