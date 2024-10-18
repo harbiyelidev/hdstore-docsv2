@@ -1,0 +1,241 @@
+import { Tabs, Callout, Steps, Cards } from 'nextra/components'
+
+# Installation Guide
+
+<Cards>
+    <Cards.Card
+        title="HDStore Playtime"
+        href="https://hdstore.tebex.io/package/6504332"
+        arrow
+    />
+    <Cards.Card
+        title="Playtime Preview"
+        href="https://www.youtube.com/watch?v=B3uT94bcKS4&t"
+        arrow
+    />
+    <Cards.Card
+        title="Support Discord"
+        href="https://discord.gg/hdstore"
+        arrow
+    />
+</Cards>
+
+<Callout type='info'>
+    If you follow this guide completely, you will install the **hdstore-playtime** script without any problems.
+</Callout>
+
+<Tabs items={['config.lua', 'server.lua', 'tebex']}>
+    <Tabs.Tab>
+        <Steps>
+            ### Locales
+
+            First, you need to set the language of the loading screen.
+
+            Defualtly set to `en (English)` the actively available languages are `en (Turkish)`.
+
+            ```lua filename="hdstore-playtime/config/config.lua" copy showLineNumbers
+            Config.Locale = 'en'
+            ```
+
+            ### Set Logs 
+
+            Set `Status` to true if you want to use log
+
+            Set `Logger` to `discord` if you want to use discord log ox_lib Set `ox_lib` if you want to use log.
+
+            ```lua filename="hdstore-playtime/config/config.lua" copy showLineNumbers
+            Config.Logs = {
+                Status = true,
+                Logger = 'discord',
+            }
+            ```
+
+            ### Set Time
+
+            Set the time in minutes for the player to receive the reward. And every time they fill that time, they get the coins written in `Reward`.
+
+            ```lua filename="hdstore-playtime/config/config.lua" copy showLineNumbers
+            Config.Coin = {
+                Time = 45,
+                Reward = 100
+            }
+            ```
+
+            ### Profile Image Source
+
+            Set the source of the profile image to be displayed on the screen. You can set it to `steam` or `game` or `false`.
+
+            ```lua filename="hdstore-playtime/config/config.lua" copy showLineNumbers
+            Config.ProfileImage = {
+                Type = 'steam', -- steam or game or false
+            }
+            ```
+
+            ### Commands Settings
+
+            You can set the commands you want to use in the script. You can set the command, description, item need, and role. If you don't want to use the item need and role, you can set it to `false`. 
+
+            ```lua filename="hdstore-playtime/config/config.lua" copy showLineNumbers
+            Config.CommandsSettings = {
+                OpenMenu = {
+                    Command = 'playtime',
+                    Description = 'Open playtime shop!',
+                    ItemNeed = {
+                        Status = false,
+                        Item = 'weapon_pistol',
+                    }
+                },
+                AddCoin = {
+                    Command = 'addcoin',
+                    Description = 'Add coin command!',
+                },
+                RemoveCoin = {
+                    Command = 'removecoin',
+                    Description = 'Remove coin command!',
+                    Role = 'group.admin',
+                },
+                CheckCoin = {
+                    Command = 'checkcoin',
+                    Description = 'Check coin command!',
+                    Role = 'group.admin',
+                }
+            }
+            ```
+
+            ### Top List Refresh Time
+
+            Set the time in minutes for the top list to refresh.
+
+            ```lua filename="hdstore-playtime/config/config.lua" copy showLineNumbers
+            Config.TopListRefreshTime = 60
+            ```
+
+            ### Item Image Source
+
+            Set the source of the item image to be displayed on the screen.
+
+            ```lua filename="hdstore-playtime/config/config.lua" copy showLineNumbers
+            Config.ItemImage = Config.Inventory() ..'/html/images'
+            ```
+
+            ### Default Garage
+
+            Set the default garage for the player to spawn in.
+
+            ```lua filename="hdstore-playtime/config/config.lua" copy showLineNumbers
+            Config.DefaultGarage = "motelgarage"
+            ```
+
+            ### Tebex Store Link
+
+            Set the link to the tebex store.
+
+            ```lua filename="hdstore-playtime/config/config.lua" copy showLineNumbers
+            Config.TebexLink = "https://hdstore.tebex.io/"
+            ```
+
+            ### Item Shop
+
+            Set the items in the shop. You can set the id, type, category, item, label, and price. 
+
+            If it is an item that users will receive, set the `type` to **item**, but if it is a vehicle, set it to **vehicle**
+
+            The item or tool you specify in the `category` section belongs to that category and is categorized accordingly
+
+            In `item` you need to enter the decal code of the item or vehicle!
+
+            In `label` you can enter anything you want as a string.
+
+            In `price` you need to enter the price of the item or vehicle!
+
+            ```lua filename="hdstore-playtime/config/config.lua" copy showLineNumbers
+            Config.ItemShop = {
+                [1] = { id = 1, type = 'item', category = 'weapon', item = 'weapon_pistol', label = 'Pistol', price = 250 },
+                [2] = { id = 2, type = 'item', category = 'weapon', item = 'weapon_carbinerifle', label = 'Carbine Rifle', price = 300 },
+                [3] = { id = 3, type = 'item', category = 'ammo', item = 'pistol_ammo', label = 'Pistol Ammo', price = 300 },
+                [4] = { id = 4, type = 'item', category = 'medical', item = 'bandage', label = 'Bandage', price = 300 },
+                [5] = { id = 5, type = 'item', category = 'other', item = 'goldbar', label = 'Gold Bar', price = 300 },
+                [6] = { id = 6, type = 'vehicle', category = 'other', item = 'cogcabrio', label = 'Cognoscenti Cabrio', price = 300 },
+            }
+            ```
+
+            ### Coin Shop
+
+            Set the items in the shop. You can set the id, amount, and packageId. 
+
+            In `amount` you have to enter how much coins will be charged to the person who buys this package!
+            In `packageId` you must enter the id of the tebex product, specify a new line for each package.
+
+            ```lua filename="hdstore-playtime/config/config.lua" copy showLineNumbers
+            Config.CoinShop = {
+                [1] = { id = 1, amount = 1, packageId = 1111111 },
+            }
+            ```
+        </Steps>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        <Steps>
+            ### Set Steam Api Key
+
+            Set the steam api key to get the player's profile image.
+
+            ```lua filename="hdstore-playtime/config/server.lua" copy showLineNumbers
+            SteamAPI = 'your_steam_api_key'
+            ```
+
+            ### Set Discord Webhook Settings
+
+            Set Discord Webhook settings Username, Profile Picture and Webhooks
+
+            ```lua filename="hdstore-playtime/config/server.lua" copy showLineNumbers
+            BotUsername = nil
+            BotImage = nil
+
+            Webhooks = {
+                ['Purchase'] = 'your_webhook',
+                ['AddCoin'] = 'your_webhook',
+                ['DeleteCoin'] = 'your_webhook',
+            }
+            ```
+        </Steps>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ### Tebex Store Integration
+
+        After logging into your Tebex account, open the `Game Servers` page from the `Integrations` tab!
+
+        <img src="https://r2.fivemanage.com/VX91vF0f30DDYFZbWik6j/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-10-18%20150436.png" width="25%"/>
+
+        You will see this page and click on the `Connect Game Servers` button!
+
+        <img src="https://r2.fivemanage.com/VX91vF0f30DDYFZbWik6j/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-10-18%20150442.png" width="100%"/>
+
+        Then you will be presented with this page, select `Plugin` and click `Continue` to continue.
+
+        <img src="https://r2.fivemanage.com/VX91vF0f30DDYFZbWik6j/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-10-18%20150450.png" width="100%"/>
+
+        You need to adjust here according to your needs!
+
+        <img src="https://r2.fivemanage.com/VX91vF0f30DDYFZbWik6j/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-10-18%20150500.png" width="100%"/>
+
+        Follow the steps here and complete the process!
+
+        <img src="https://r2.fivemanage.com/VX91vF0f30DDYFZbWik6j/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-10-18%20150508.png" width="100%"/>
+
+        Go to the `Packages` page to create or edit a new package!
+
+        <img src="https://r2.fivemanage.com/VX91vF0f30DDYFZbWik6j/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-10-18%20150558.png" width="25%"/>
+
+        Scroll down to the bottom of the edit page, add `Game Server Commands` and configure the settings!
+
+        <img src="https://r2.fivemanage.com/VX91vF0f30DDYFZbWik6j/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-10-18%20150620.png" width="100%"/>
+
+        After adding it, add the server you just created or the one for configuration
+
+        <img src="https://r2.fivemanage.com/VX91vF0f30DDYFZbWik6j/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-10-18%20150626.png" width="100%"/>
+
+        Add the command `addcoin {sid} {transaction} {packageId}` and save and that's it!
+        
+        <img src="https://r2.fivemanage.com/VX91vF0f30DDYFZbWik6j/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-10-18%20150705.png" width="100%"/>
+    </Tabs.Tab>
+</Tabs>
