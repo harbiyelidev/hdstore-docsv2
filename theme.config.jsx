@@ -1,76 +1,73 @@
-import { useEffect } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { useConfig } from 'nextra-theme-docs';
- 
-export default {
-    logo: <div style={{"paddingLeft": "47px", "lineHeight": "38px", "background": "url('https://i.hizliresim.com/jdw864z.png') no-repeat left", "backgroundSize": "36px", "fontWeight": "550"}}>HDStore</div>,
-    project: {
-      link: 'https://github.com/harbiyelidev/hdstore-docs'
-    },
-    head: (
-      <>
-        <title>%s - HDStore Docs</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta
-          name="description"
-          content='Discover the top-rated FiveM scripts and mods at HD Store. Secure, high-performance ESX and QBCore resources tailored for your server. Unlock exclusive Tebex deals today!'
-        />
-        <meta name="author" content="HarbiyeliDev" />
-        <meta
-          name="keywords"
-          content="Top FiveM Scripts, Buy ESX Scripts, QBCore Mods, Secure Tebex Mods, Premium FiveM Deals, Custom FiveM Server Scripts, Roleplay Mods, Tebex Store, High-Performance GTA V Mods, HDStore, Tebex Fivem, Fivem Store, Docs, HDStore Docs"
-        />
-        <meta property="og:url" content='https://docs.hdstore.info' />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="HDStore" />
-        <meta
-          property="og:title"
-          content='HDStore Docs'
-        />
-        <meta
-          property="og:description"
-          content='Discover the top-rated FiveM scripts and mods at HD Store. Secure, high-performance ESX and QBCore resources tailored for your server. Unlock exclusive Tebex deals today!'
-        />
-        <meta property="og:image" content="https://i.imgur.com/rpv9yPd.jpeg" />
-        <meta
-          property="og:image:alt"
-          content='Discover the top-rated FiveM scripts and mods at HD Store. Secure, high-performance ESX and QBCore resources tailored for your server. Unlock exclusive Tebex deals today!'
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:creator" content="@vezironi" />
-      </>
-    ),
-    chat: {
-      link: 'https://discord.gg/hdstore'
-    },
-    banner: {
-        key: 'hdstore-discount',
-        dismissible: false,
-        text: (
-          <a href="https://hdstore.tebex.io" target="_blank">
-            🎉 20% Discount on all products →
-          </a>
-        )
-    },
-    sidebar: {
-        toggleButton: false
-    },
-    navigation: {
-        prev: true,
-        next: true,
-    },
-    feedback: {
-        useLink() {
-            return 'https://discord.gg/hdstore'
-        }
-    },
-    footer: {
-      content: (
-          <span>
-              Copyright © HDStore 2024. All Rights Reserved.
-          </span>
-      )
-    },
-    faviconGlyph: '🐍'
+
+function useHead() {
+  const { asPath } = useRouter();
+  const { frontMatter, title } = useConfig();
+  const url = `https://docs.hdstore.info${asPath}`;
+  const description = frontMatter.description || "Documentation for HDStore's resources for FiveM";
+
+  return (
+    <>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="icon" type="image/x-icon" href="/static/hdstore.ico" />
+      <meta httpEquiv="Content-Language" content="en" />
+      <meta name="description" content={description} />
+      <meta name="og:title" content={title} />
+      <meta name="og:description" content={description} />
+      <meta name="og:url" content={url} />
+    </>
+  );
 }
+
+function useNextSeoProps() {
+  const { asPath } = useRouter();
+  const arr = asPath.replace(/[-_]/g, ' ').split('/');
+  const category = (arr[1][0] !== '#' && arr[1]) || 'HDStore';
+  const rawTitle = arr[arr.length - 1];
+  const title = /[a-z]/.test(rawTitle) && /[A-Z]/.test(rawTitle) ? rawTitle : '%s';
+
+  return {
+    titleTemplate: `${title} - ${
+      rawTitle === category ? 'Documentation' : category.replace(/(^\w|\s\w)/g, (m) => m.toUpperCase())
+    }`,
+  };
+}
+
+const config = {
+  logo: (
+    <div style={{ paddingLeft: "47px", lineHeight: "38px", background: "url('https://i.hizliresim.com/jdw864z.png') no-repeat left", backgroundSize: "36px", fontWeight: "550" }}>HDStore</div>
+  ),
+  project: {
+    link: 'https://github.com/harbiyelidev/hdstore-docsv2',
+  },
+  chat: {
+    link: 'https://discord.gg/hdstore',
+  },
+  docsRepositoryBase: 'https://github.com/harbiyelidev/ohdstore-docsv2/blob/main',
+  footer: {
+    text: 'Copyright © HDStore 2024. All Rights Reserved.',
+  },
+  head: useHead,
+  banner: {
+    key: 'hdstore-discount',
+    dismissible: false,
+    text: (
+      <a href="https://hdstore.tebex.io" target="_blank">
+        🎉 20% Discount on all products →
+      </a>
+    ),
+  },
+  primaryHue: { dark: 200, light: 200 },
+  sidebar: {
+    defaultMenuCollapseLevel: 1,
+  },
+  toc: {
+    backToTop: true,
+  },
+  useNextSeoProps: useNextSeoProps,
+  faviconGlyph: '🐍',
+};
+
+export default config;
