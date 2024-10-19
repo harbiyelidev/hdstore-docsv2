@@ -32,7 +32,7 @@ const config = {
   chat: {
     link: 'https://discord.gg/hdstore',
   },
-  docsRepositoryBase: 'https://github.com/harbiyelidev/ohdstore-docsv2/blob/main',
+  docsRepositoryBase: 'https://github.com/harbiyelidev/hdstore-docsv2/blob/main',
   footer: {
     text: 'Copyright © HDStore 2024. All Rights Reserved.',
   },
@@ -53,7 +53,6 @@ const config = {
   toc: {
     backToTop: true,
   },
-  faviconGlyph: '🐍',
 };
 
 export default config;
